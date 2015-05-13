@@ -1,0 +1,11 @@
+@mixin clearfix(){
+	zoom:1;
+	&:before,
+	&:after{
+		content:'\20';
+		display:table;
+	}
+	&:after{
+		clear:both;
+	}
+}

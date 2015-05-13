@@ -1,0 +1,123 @@
+$header-height:				50px;
+$header-background-color:	#413f3f;
+$header-background-image:	'../images/common/test.png' !default;
+$header-zindex:				9;
+
+$logo-shadow-color:			darken($header-background-color,6);
+$logo-background-color:		darken($header-background-color,5);
+
+
+$toolbar-height:				35px;
+$toolbar-zindex:			10;
+
+$sidebar-width:				200px;
+$sidebar-background-color:	#e5e5e5;
+$sidebar-background-image:	'../images/common/sidebar.png' !default;
+$sidebar-zindex:			9;
+
+$content-zindex:			8;
+
+html,body{
+	height:100%;
+}
+body{
+	font-family:'Microsoft Yahei';
+}
+.wrapper{
+	max-width:1920px;
+	height:100%;
+	position:relative;
+}
+.header{
+	min-height:$header-height;
+	@include box-shadow(inset 0px -2px 3px 0 rgba(0,0,0,0.1));
+	background-color:$header-background-color;
+	background-clip:padding-clip;
+	position:relative;
+	z-index:$header-zindex;
+}
+.logo{
+	width:$sidebar-width;
+	height:$header-height;
+	@include box-shadow(inset -1px 0 2px 0 $logo-shadow-color);
+	background-color:$logo-background-color;
+	float:left;
+}
+.nav{
+	list-style:none;
+	margin-left:20px;
+	float:left;
+	li{
+		float:left;
+		a{
+			line-height:50px;
+			height:50px;
+			color:#222;
+			text-shadow:1px 1px 1px #727070;
+			padding:0 15px;
+			display:block;
+			-webkit-transform:scale(.825);
+			&:hover,
+			&:focus{
+				text-decoration:none;
+			}
+		}
+	}
+}
+.toolbar{
+	height:35px;
+	border-bottom:1px solid #d9d9d9;
+	@include box-shadow(0px 1px 3px 0 rgba(0,0,0,0.1));
+	background:-webkit-linear-gradient(top,#fff,$sidebar-background-color);
+	position:absolute;
+	top:$header-height;
+	right:0;
+	left:0;
+}
+.sidebar{
+	width:$sidebar-width;
+	@include box-shadow(inset -1px 0 2px 0 rgb(204,204,204));
+	background-color:$sidebar-background-color;
+	position:absolute;
+	z-index:$sidebar-zindex;
+	top:$header-height + $toolbar-height;
+	bottom:0;
+	ul{
+		border-bottom:1px solid #edeff0;
+		padding-right:2px;
+		li{
+			height:45px;
+			line-height:43px;
+			border:1px solid;
+			border-color:#edeff0 transparent #dbe0e2;
+			a{
+				color:#595a5a;
+				padding-left:35px;
+				display:block;
+				&:hover,
+				&:focus{
+					text-decoration:none;
+				}
+			}
+			&:first-child{
+				border-top:0;
+			}
+		}
+	}
+}
+.content{
+	padding:15px;
+	position:absolute;
+	top:$header-height + $toolbar-height;
+	right:0;
+	bottom:0;
+	left:$sidebar-width;
+	z-index:$content-zindex;
+}
+.header,
+.nav,
+.toolbar,
+.tabs,
+.clearfix{
+	@include clearfix();
+}
