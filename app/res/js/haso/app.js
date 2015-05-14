@@ -11,8 +11,10 @@ angular
 		controller: 'homeController'
 	});
 }])
-.run(['$rootScope','$templateCache',function($rootScope,$templateCache){
+.run(['$rootScope','$templateCache','$timeout',function($rootScope,$templateCache,$timeout){
 	$rootScope.domain = document.domain.replace(/^(.+?\.)??(?=(test\.)?[^.]+\.\w+$)/,'');
+	$rootScope.timestamp = parseInt(Date.now() / 1000,10);
+
 	$templateCache.put('template/common/wrapper.htm','<div class="wrapper"><header></header><div class="container" ng-view></div><footer></footer></div>');
 	$templateCache.put('template/common/header.htm','<div class="header"><div class="logo"><h1><a href="/">一起装逼吧</a></h1></div><div class="clearfix"></div><ul class="nav"><li ng-repeat="nav in navs" ng-init="lock=false" ng-mouseenter="lock=!lock" ng-mouseleave="lock=!lock"><a ng-href="{{ nav.url }}" ng-bind="nav.name"></a><ul ng-if="nav.items" ng-show="lock"><li ng-repeat="child in nav.items"><a ng-href="{{ child.url }}" ng-bind="child.name"></a></li></ul></li></ul></div>');
 	$templateCache.put('template/common/footer.htm','<div class="footer"><a href="http://www.miibeian.gov.cn/">鄂ICP备88888888号</a> · <a href="">关于装逼</a> · <a href="">投放广告</a> · <a href="">友情链接</a></div>')
@@ -72,16 +74,18 @@ angular
 		$scope.articles = data;
 	});
 }])
-.filter('formatDate',function(){
+.filter('formatDate',['$filter',function($filter){
 	return function(timestamp){
-		if(timestamp.length < 10) return timestamp;
-		if(timestamp.length > 10) timestamp = timestamp.substring(0,10);
-		var current = parseInt(Date.now() / 1000,10);
-		var decrease = current - timestamp;
-		if(decrease < 0) return current;
+		if(timestamp.length < 13) return timestamp;
+		var current = Date.now();
+		var decrease = parseInt((current - timestamp) / 1000,10);
+		if(decrease < 0) return '刚刚';
 		if(decrease < 60) return decrease + '秒前';
 		if(decrease < 3600) return Math.ceil(decrease / 60) + '分钟前';
-		decrease = (new Date('2015-5-11').getTime() - new Date('2015-5-1').getTime()) / 1000;
-		console.log();
+		decrease = (new Date($filter('date')(current,'yyyy-MM-dd')).getTime() - new Date($filter('date')(timestamp,'yyyy-MM-dd')).getTime()) / 1000;
+		if(decrease == 0) return $filter('date')(timestamp,'HH:ii');
+		if(decrease == 86400) return '昨天' + $filter('date')(timestamp,'HH:ii');
+		if(decrease == 172800) return '前天' + $filter('date')(timestamp,'HH:ii');
+		if(new Date($filter('date')(current,'yyyy')).getTime() == new Date($filter('date')(timestamp,'yyyy')).getTime()) return $filter('date')(timestamp,'MM-dd HH:mm');
 	}
-});
+}]);
