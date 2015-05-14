@@ -88,4 +88,11 @@ angular
 		if(decrease == 172800) return '前天' + $filter('date')(timestamp,'HH:ii');
 		if(new Date($filter('date')(current,'yyyy')).getTime() == new Date($filter('date')(timestamp,'yyyy')).getTime()) return $filter('date')(timestamp,'MM-dd HH:mm');
 	}
-}]);
+}])
+.factory('util',function($filter){
+	return {
+		str2time: function(){
+			
+		}
+	}
+})
