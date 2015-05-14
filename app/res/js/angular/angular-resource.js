@@ -113,30 +113,30 @@ function shallowClearAndCopy(src, dst) {
  *
  *   Where:
  *
- *   - **`action`** 鈥� {string} 鈥� The name of action. This name becomes the name of the method on
+ *   - **`action`** – {string} – The name of action. This name becomes the name of the method on
  *     your resource object.
- *   - **`method`** 鈥� {string} 鈥� HTTP request method. Valid methods are: `GET`, `POST`, `PUT`,
+ *   - **`method`** – {string} – HTTP request method. Valid methods are: `GET`, `POST`, `PUT`,
  *     `DELETE`, and `JSONP`.
- *   - **`params`** 鈥� {Object=} 鈥� Optional set of pre-bound parameters for this action. If any of
+ *   - **`params`** – {Object=} – Optional set of pre-bound parameters for this action. If any of
  *     the parameter value is a function, it will be executed every time when a param value needs to
  *     be obtained for a request (unless the param was overridden).
- *   - **`url`** 鈥� {string} 鈥� action specific `url` override. The url templating is supported just
+ *   - **`url`** – {string} – action specific `url` override. The url templating is supported just
  *     like for the resource-level urls.
- *   - **`isArray`** 鈥� {boolean=} 鈥� If true then the returned object for this action is an array,
+ *   - **`isArray`** – {boolean=} – If true then the returned object for this action is an array,
  *     see `returns` section.
- *   - **`transformRequest`** 鈥�
- *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` 鈥�
+ *   - **`transformRequest`** –
+ *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
  *     transform function or an array of such functions. The transform function takes the http
  *     request body and headers and returns its transformed (typically serialized) version.
- *   - **`transformResponse`** 鈥�
- *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` 鈥�
+ *   - **`transformResponse`** –
+ *     `{function(data, headersGetter)|Array.<function(data, headersGetter)>}` –
  *     transform function or an array of such functions. The transform function takes the http
  *     response body and headers and returns its transformed (typically deserialized) version.
- *   - **`cache`** 鈥� `{boolean|Cache}` 鈥� If true, a default $http cache will be used to cache the
+ *   - **`cache`** – `{boolean|Cache}` – If true, a default $http cache will be used to cache the
  *     GET request, otherwise if a cache instance built with
  *     {@link ng.$cacheFactory $cacheFactory}, this cache will be used for
  *     caching.
- *   - **`timeout`** 鈥� `{number|Promise}` 鈥� timeout in milliseconds, or {@link ng.$q promise} that
+ *   - **`timeout`** – `{number|Promise}` – timeout in milliseconds, or {@link ng.$q promise} that
  *     should abort the request when resolved.
  *   - **`withCredentials`** - `{boolean}` - whether to set the `withCredentials` flag on the
  *     XHR object. See {@link https://developer.mozilla.org/en/http_access_control#section_5
@@ -281,20 +281,20 @@ function shallowClearAndCopy(src, dst) {
  * # Creating a custom 'PUT' request
  * In this example we create a custom method on our resource to make a PUT request
  * <pre>
- *    var app = angular.module('app', ['ngResource', 'ngRoute']);
+ *		var app = angular.module('app', ['ngResource', 'ngRoute']);
  *
- *    // Some APIs expect a PUT request in the format URL/object/ID
- *    // Here we are creating an 'update' method 
- *    app.factory('Notes', ['$resource', function($resource) {
+ *		// Some APIs expect a PUT request in the format URL/object/ID
+ *		// Here we are creating an 'update' method 
+ *		app.factory('Notes', ['$resource', function($resource) {
  *    return $resource('/notes/:id', null,
  *        {
  *            'update': { method:'PUT' }
  *        });
- *    }]);
+ *		}]);
  *
- *    // In our controller we get the ID from the URL using ngRoute and $routeParams
- *    // We pass in $routeParams and our Notes factory along with $scope
- *    app.controller('NotesCtrl', ['$scope', '$routeParams', 'Notes',
+ *		// In our controller we get the ID from the URL using ngRoute and $routeParams
+ *		// We pass in $routeParams and our Notes factory along with $scope
+ *		app.controller('NotesCtrl', ['$scope', '$routeParams', 'Notes',
                                       function($scope, $routeParams, Notes) {
  *    // First get a note object from the factory
  *    var note = Notes.get({ id:$routeParams.id });
@@ -304,7 +304,7 @@ function shallowClearAndCopy(src, dst) {
  *    Notes.update({ id:$id }, note);
  *
  *    // This will PUT /notes/ID with the note object in the request payload
- *    }]);
+ *		}]);
  * </pre>
  */
 angular.module('ngResource', ['ng']).

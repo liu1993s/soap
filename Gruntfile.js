@@ -16,10 +16,14 @@ module.exports = function(grunt){
 				options: {
 					livereload: '<%= connect.options.livereload %>'
 				},
-				files: [
-					'<%= config.app %>{,*/}*.{htm,html}',
-					'<%= config.res %>{,*/}*.{js,css,png,jpg}'
-				]
+				files: '<%= config.app %>{,*/}*.{htm,html}'
+			},
+			uglify: {
+				options: {
+					livereload: '<%= connect.options.livereload %>'
+				},
+				files: '<%= config.res %>js/haso/app.js',
+				tasks: ['uglify:dev']
 			}
 		},
 		connect: {
@@ -32,8 +36,37 @@ module.exports = function(grunt){
 				open: true,
 				base: ['app']
 			}
+		},
+		uglify: {
+			options: {
+				report: 'min',
+				mangle: true,
+				preserveComments: false,
+				compress: {
+					//drop_console: true
+				}
+			},
+			init: {
+				options: {
+					sourceMap: true,
+					sourceMapName: '<%= config.res %>js/haso.js.map'
+				},
+				files:{
+					'<%= config.res %>js/haso.js': ['<%= config.res %>js/haso/*.js'],
+					'<%= config.res %>js/haso.lib.js': [
+						'<%= config.res %>js/angular/angular.js',
+						'<%= config.res %>js/angular/angular-route.js',
+						'<%= config.res %>js/angular/angular-resource.js'
+					]
+				}
+			},
+			dev: {
+				files:{
+					'<%= config.res %>js/haso.js': ['<%= config.res %>js/haso/*.js']
+				}
+			}
 		}
 	});
 
-	grunt.registerTask('default',['connect:server','watch']);
+	grunt.registerTask('default',['connect','uglify:init','watch']);
 };

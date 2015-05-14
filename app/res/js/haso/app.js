@@ -1,6 +1,6 @@
 'use strict';
 angular
-.module('7ZhuangB',['ngRoute','ngResource'])
+.module('haso',['ngRoute','ngResource'])
 .config(['$routeProvider',function($routeProvider){
 	$routeProvider
 	.when('/',{
@@ -76,7 +76,12 @@ angular
 	return function(timestamp){
 		if(timestamp.length < 10) return timestamp;
 		if(timestamp.length > 10) timestamp = timestamp.substring(0,10);
-		var current = parseInt(new Date().getTime() / 1000,10);
-		if(current < timestamp) return;
+		var current = parseInt(Date.now() / 1000,10);
+		var decrease = current - timestamp;
+		if(decrease < 0) return current;
+		if(decrease < 60) return decrease + '秒前';
+		if(decrease < 3600) return Math.ceil(decrease / 60) + '分钟前';
+		decrease = (new Date('2015-5-11').getTime() - new Date('2015-5-1').getTime()) / 1000;
+		console.log();
 	}
 });
