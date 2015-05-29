@@ -1,0 +1,10 @@
+<ul class='nav'>
+	<li ng-repeat='nav in navs' ng-init='nav.current = false' ng-mouseenter='nav.current = !nav.current' ng-mouseleave='nav.current = !nav.current'>
+		<a href='{{ nav.url }}' ng-bind='nav.name'></a>
+		<ul ng-if='nav.items' ng-show='nav.current'>
+			<li ng-repeat='child in nav.items'>
+				<a href='{{ child.url }}' ng-bind='child.name'></a>
+			</li>
+		</ul>
+	</li>
+</ul>

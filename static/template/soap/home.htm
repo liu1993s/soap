@@ -1,0 +1,21 @@
+<div class='content'>
+	<ul class='article'>
+		<li ng-repeat='article in articles'>
+			<a href='' class='thumbs' style='background-image:url({{ article.thumbs }});'></a>
+			<div class='details'>
+				<div class='comment' ng-bind='article.comment'></div>
+				<span><a href='' ng-bind='article.tags'></a> , {{ article.postdate | dateFormat }}</span>
+				<a href=''><h2 ng-bind='article.subject'></h2></a>
+				<p ng-bind='article.description'></p>
+				<div class='star'><i class='icon-star-o'></i>{{ article.like | number }}</div>
+			</div>
+		</li>
+	</ul>
+	<div class='page'>
+		<a href='' class='prev pr10'><i class='icon-angle-left mr5'></i>上一页</a>
+		<a href='' ng-repeat='page in [1,2,3,4,5,99]' ng-class='page == 2 ? "active" : ""' ng-bind='page'></a>
+		<a href='' class='next pl10'>下一页<i class='icon-angle-right ml5'></i></a>
+		<span>2 / {{ 1960 | number }}</span>
+	</div>
+</div>
+<soap-sidebar></soap-sidebar>

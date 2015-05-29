@@ -1,0 +1,13 @@
+@mixin clearfix(){
+	zoom:1;
+	&:before,
+	&:after{
+		height:0;
+		content:'\20';
+		visibility:height;
+		display:block;
+	}
+	&:after{
+		clear:both;
+	}
+}
