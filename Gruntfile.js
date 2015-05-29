@@ -29,12 +29,14 @@ module.exports = function(grunt){
 		connect: {
 			options: {
 				port: 9000,
-				hostname: 'localhost',
+				hostname: '*',
 				livereload: 35729
 			},
 			server: {
-				open: true,
-				base: ['app']
+				options: {
+					open: true,
+					base: ['app']
+				}
 			}
 		},
 		uglify: {
