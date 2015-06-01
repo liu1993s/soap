@@ -10,6 +10,10 @@ soap.directive('soapWrapper',function(){
 	return {
 		restrict: 'E',
 		replace: true,
+		controller: ['$scope','$menus',function($scope,$menus){
+			console.log($menus);
+			$scope.navs = $menus;
+		}],
 		templateUrl: 'template/admin/common/header.htm'
 	}
 })

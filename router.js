@@ -3,7 +3,7 @@ module.exports = function(request,response){
 
 	response.set({'X-Powered-By': 'soap'});
 	if(path === 'api'){
-		response.send('api');
+		soap.api[request.path[1]][request.method](request,response);
 	}else{
 		response.set({'Content-Type': 'text/html'});
 		if(path === 'admin'){

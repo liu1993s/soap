@@ -1,12 +1,7 @@
-<ul>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-	<li><a href=''>test1</a></li>
-</ul>
+<div class='sidebar'>
+	<ul>
+		<li ng-repat='sidebar in sidebars'>
+			<a href='' ng-bind='sidebar.name'></a>
+		</li>
+	</ul>
+</div>
